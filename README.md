@@ -1,10 +1,12 @@
 # Crypto Data Pipeline & Dashboard
 
-This project is an end-to-end data engineering pipeline that collects real-time cryptocurrency data from the CoinGecko API, processes and stores it in a database, and presents insights through an interactive Streamlit dashboard. It showcases the full lifecycle of data, from ingestion to visualization, using automated and modular components.
+This project is an end-to-end data engineering pipeline that collects real-time cryptocurrency data from the CoinGecko API, processes and stores it in a PostgreSQL database (Supabase), and presents insights through an interactive Streamlit dashboard. It showcases the full lifecycle of data, from ingestion to visualization, using automated and modular components.
 
 ## Pipeline Architecture
 
-API → Extract → Raw Storage → Transform → Database → Dashboard
+API → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dashboard (Streamlit)
+
+---
 
 ## Tech Stack
 
@@ -14,8 +16,12 @@ API → Extract → Raw Storage → Transform → Database → Dashboard
 | requests | Fetch data from the CoinGecko API |
 | JSON | Store raw data files |
 | pandas | Data cleaning and transformation |
-| SQLite | Store structured data |
+| PostgreSQL | Cloud database for structured data |
+| Supabase | Managed PostgreSQL hosting |
 | SQL | Define schema and query data |
+| SQLAlchemy | Database connection and ORM |
+| psycopg | PostgreSQL driver |
+| python-dotenv | Manage environment variables |
 | Streamlit | Build interactive dashboard |
 | glob | Handle file selection (latest data) |
 | datetime | Generate timestamps for data collection |
@@ -26,7 +32,7 @@ API → Extract → Raw Storage → Transform → Database → Dashboard
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/khalidiktib/crypto-pipeline>
 cd crypto-pipeline
 ```
 
@@ -36,40 +42,54 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-### 3. Install dependencies
+### 3. Configure environment variables
+```bash
+Create a .env file in the project root:
+DATABASE_URL=postgresql+psycopg://connection-string
+```
+
+### 4. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the pipeline
+### 5. Run the pipeline
 ```bash
 python pipeline.py
 ```
 
-### 5. Launch the dashboard
+### 6. Launch the dashboard
 ```bash
 streamlit run dashboard.py
 ```
+
+## Live Demo
+
+🌐[View Dashboard](https://crypto-pipeline-zjyqkesccvwuwpza7nw73q.streamlit.app/)
+
 ---
 
 ## What I Learned
 
-- How to build an end-to-end data pipeline (Extract → Transform → Load → Dashboard)
-- How to work with REST APIs and handle real-world issues like network errors and bad responses
-- How to clean and structure data using pandas for analysis and storage
-- How to design a database schema and store time-series data using SQLite
-- How to organize a project into modular scripts (extract, transform, load, pipeline)
-- How to turn data into insights using an interactive Streamlit dashboard
+- Built an end-to-end data pipeline (Extract → Transform → Load → Dashboard)
+- Worked with REST APIs and handled real-world issues like network failures and API errors
+- Cleaned and structured data using pandas for analysis and storage
+- Migrated from SQLite to PostgreSQL (Supabase) for a scalable cloud-based solution
+- Used SQLAlchemy and environment variables to manage database connections securely
+- Organized a project into modular and reusable components
+- Transformed data into insights through an interactive Streamlit dashboard
 
 ---
 
 
-# What is built
-- Data pipeline  
-- Database  
-- Automation  
-- Dashboard  
-- Documentation  
+# Project Components
+- Data Pipeline (ETL workflow)
+- Raw Data Storage (JSON files)
+- Data Transformation (pandas)
+- Cloud Database (PostgreSQL - Supabase)
+- Automation (pipeline script)
+- Dashboard (Streamlit)
+- Documentation (README)
 
 ---
 
