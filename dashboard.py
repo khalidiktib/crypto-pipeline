@@ -11,10 +11,11 @@ st.title('Crypto Data Pipeline')
 load_dotenv()
 
 #create engine (Postgres / Supabase)
+database_url = os.getenv('DATABASE_URL') or st.secrets['DATABASE_URL']
 engine = create_engine(
-    os.getenv('DATABASE_URL'),
+    database_url,
     connect_args={'sslmode': 'require'}
-    )
+)
 
 #historical data
 df = pd.read_sql('SELECT * FROM coin_prices', engine)
