@@ -11,7 +11,7 @@ st.title('Crypto Data Pipeline')
 load_dotenv()
 
 #create engine (Postgres / Supabase)
-database_url = os.getenv('DATABASE_URL') or st.secrets['DATABASE_URL']
+database_url = (os.getenv('DATABASE_URL') or st.secrets['DATABASE_URL']).replace("postgresql://", "postgresql+psycopg://")
 st.write("DB URL found:", database_url is not None)
 engine = create_engine(
     database_url,
