@@ -41,7 +41,7 @@ st.bar_chart(df_chart)
 
 
 #Price overtime
-shaped_df = df.pivot(index='collected_at', columns='id', values='current_price')
+shaped_df = df.groupby(['collected_at', 'id'])['current_price'].mean().unstack('id') #Fixing duplicate entries for the same (collected_at, id) combination: Before pivoting, aggregate duplicates by taking the average
 st.subheader("Price Over Time")
 st.line_chart(shaped_df)
 
