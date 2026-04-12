@@ -1,10 +1,10 @@
 # Crypto Data Pipeline & Dashboard
 
-This project is an end-to-end data engineering pipeline that collects real-time cryptocurrency data from the CoinGecko API, processes and stores it in a PostgreSQL database (Supabase), and presents insights through an interactive Streamlit dashboard. It showcases the full lifecycle of data, from ingestion to visualization, using automated and modular components.
+This project is an end-to-end data engineering pipeline that collects real-time cryptocurrency data from the CoinGecko API, processes and stores it in a PostgreSQL database (Supabase), and presents insights through an interactive Streamlit dashboard. The pipeline is orchestrated and scheduled using Apache Airflow, showcasing a production-style data workflow from ingestion to visualization.
 
 ## Pipeline Architecture
 
-API → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dashboard (Streamlit)
+Airflow → Pipeline → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dashboard (Streamlit)
 
 ---
 
@@ -22,6 +22,7 @@ API → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dash
 | SQLAlchemy | Database connection and ORM |
 | psycopg | PostgreSQL driver |
 | python-dotenv | Manage environment variables |
+| Apache Airflow | Pipeline orchestration and scheduling |
 | Streamlit | Build interactive dashboard |
 | glob | Handle file selection (latest data) |
 | datetime | Generate timestamps for data collection |
@@ -32,7 +33,7 @@ API → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dash
 
 ### 1. Clone the repository
 ```bash
-git clone <https://github.com/khalidiktib/crypto-pipeline>
+git clone https://github.com/khalidiktib/crypto-pipeline
 cd crypto-pipeline
 ```
 
@@ -43,8 +44,8 @@ venv\Scripts\activate
 ```
 
 ### 3. Configure environment variables
-```bash
 Create a .env file in the project root:
+```bash
 DATABASE_URL=postgresql+psycopg://connection-string
 ```
 
@@ -54,8 +55,14 @@ pip install -r requirements.txt
 ```
 
 ### 5. Run the pipeline
+Start Airflow services:
 ```bash
-python pipeline.py
+airflow webserver --port 8080
+airflow scheduler
+```
+Then trigger the DAG from the Airflow UI:
+```bash
+http://localhost:8080
 ```
 
 ### 6. Launch the dashboard
@@ -76,6 +83,7 @@ streamlit run dashboard.py
 - Cleaned and structured data using pandas for analysis and storage
 - Migrated from SQLite to PostgreSQL (Supabase) for a scalable cloud-based solution
 - Used SQLAlchemy and environment variables to manage database connections securely
+- Implemented Apache Airflow for workflow orchestration and scheduling
 - Organized a project into modular and reusable components
 - Transformed data into insights through an interactive Streamlit dashboard
 
@@ -87,7 +95,7 @@ streamlit run dashboard.py
 - Raw Data Storage (JSON files)
 - Data Transformation (pandas)
 - Cloud Database (PostgreSQL - Supabase)
-- Automation (pipeline script)
+- Workflow Orchestration (Apache Airflow)
 - Dashboard (Streamlit)
 - Documentation (README)
 
