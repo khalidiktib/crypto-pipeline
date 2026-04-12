@@ -3,8 +3,7 @@
 This project is an end-to-end data engineering pipeline that collects real-time cryptocurrency data from the CoinGecko API, processes and stores it in a PostgreSQL database (Supabase), and presents insights through an interactive Streamlit dashboard. The pipeline is orchestrated and scheduled using Apache Airflow, showcasing a production-style data workflow from ingestion to visualization.
 
 ## Pipeline Architecture
-
-Airflow → Pipeline → Extract → Raw Storage → Transform → PostgreSQL (Supabase) → Dashboard (Streamlit)
+![Pipeline Architecture](pipeline.svg)
 
 ---
 
